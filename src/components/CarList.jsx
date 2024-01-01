@@ -3,7 +3,13 @@ import { removeCar } from '../store'
 
 
 const CarList = () => {
-    const cars = useSelector(state => state.cars.data);
+    const { cars, name } = useSelector(({ form, cars: { data, searchTerm } }) => {
+        const filteredCars = data.filter(car => car.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        return {
+            cars: filteredCars,
+            name: form.name,
+        };
+    });
     const dispatch = useDispatch();
 
     const handleDelete = (car) => {
@@ -11,8 +17,9 @@ const CarList = () => {
     };
 
     const renderedCars = cars.map(car => {
+        const bold = name && car.name.toLowerCase().includes(name.toLowerCase()) ? 'bold' : '';
         return (
-            <div key={car.id} className="panel">
+            <div key={car.id} className={`panel ${bold}`}>
                 <p >{car.name} - ${car.cost}</p>
                 <button className='button is-danger' onClick={() => handleDelete(car)}>Delete</button>
             </div>
