@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateName, updateCost, addCar } from '../store';
 const CarForm = () => {
@@ -40,9 +39,7 @@ const CarForm = () => {
                     </div>
 
                     <div className="field">
-                        <div className="control">
-                            <button className="button is-link" type='submit'>Add</button>
-                        </div>
+                        <button className="button is-link" type='submit'>Submit</button>
                     </div>
                 </div>
             </form>
